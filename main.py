@@ -39,24 +39,26 @@ def writeDocument(content):
 	
 
 def main():
-	if(len(sys.argv) < 3):
-		print '\nUsage : main.py IP IMAGENAME run_listener \n'
-		print 'Example: main.py 127.0.0.1 test.jpg 0\n' # will not run listener
-		print 'Example: main.py 127.0.0.1 test.jpg 1' # will  run listener
-	else:
-		host = sys.argv[1]
-		image = sys.argv[2]
-		run_msf = sys.argv[3]
-		writeDocument(generateDocument(host,image))
-		if(int(run_msf) == 1):
-			runListener(host)
-		
-	
-	print '\n\n'
+    if len(sys.argv) != 4:
+        print('\nUsage: main.py IP IMAGENAME run_listener\n')
+        print('Example: main.py 127.0.0.1 test.jpg 0  # will not run listener')
+        print('Example: main.py 127.0.0.1 test.jpg 1  # will run listener\n')
+    else:
+        host = sys.argv[1]
+        image = sys.argv[2]
+        run_msf = sys.argv[3]
 
-    
-    
-    
+        if run_msf not in ('0', '1'):
+            print('\nInvalid value for run_listener. Please provide 0 or 1.\n')
+            return
+
+        writeDocument(generateDocument(host, image))
+        if int(run_msf) == 1:
+            runListener(host)
+
+    print('\n\n')
+
+
 if __name__ == "__main__":
     main()
 
